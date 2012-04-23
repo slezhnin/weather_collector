@@ -1,28 +1,37 @@
 package info.lezhnin.weather.collector;
 
 import org.joox.Match;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.w3c.dom.Document;
 
 import java.io.InputStream;
 import java.net.URL;
 
-import static org.joox.JOOX.*;
+import static org.joox.JOOX.$;
 
 /**
- * Created with IntelliJ IDEA.
- * User: sirius
- * Date: 21.04.12
- * Time: 15:49
- * To change this template use File | Settings | File Templates.
+ * Weather Test.
+ * <p/>
+ * Date: 22.04.12
+ *
+ * @author Sergey Lezhnin <s.lezhnin@gmail.com>
  */
-public class YahooTest {
-    public static String YAHOO_APPID = "6Bs9OQLV34E2rlFrKF.H2Hhzzxv0G_TFRwZEspI8U6XJ0NmHAG9mrShLrM5_RUcy8CvFJMqqV1t9N868U6CGcQvTytlSpao-";
-    public static String YAHOO_PLACES_URI = "http://where.yahooapis.com/v1/places.q(%s)?appid=" + YAHOO_APPID;
+public class WeatherTest {
+
+    public static WeatherTestConfig weatherConfig;
+
+    @BeforeClass
+    public static void before() throws Exception {
+        weatherConfig = (WeatherTestConfig) new ClassPathXmlApplicationContext(
+                "info/lezhnin/weather/collector/weather_config.xml").getBean("weatherConfig");
+    }
 
     @Test
     public void testWOEID() throws Exception {
-        String uri = String.format(YAHOO_PLACES_URI, "Stockholm");
+        String uri = String.format(weatherConfig.getYahooPlacesURI(), weatherConfig.getYahooPlaceName(),
+                weatherConfig.getYahooAppId());
         URL url = new URL(uri);
         InputStream is = (InputStream) url.getContent();
         try {
@@ -36,12 +45,9 @@ public class YahooTest {
         }
     }
 
-    public static String YAHOO_WEATHER_URI = "http://weather.yahooapis.com/forecastrss?w=%s&u=c";
-    public static String PLACE_WOEID = "906057";
-
     @Test
     public void testYahooWeather() throws Exception {
-        String uri = String.format(YAHOO_WEATHER_URI, PLACE_WOEID);
+        String uri = String.format(weatherConfig.getYahooForecastURI(), weatherConfig.getYahooPlaceId());
         URL url = new URL(uri);
         InputStream is = (InputStream) url.getContent();
         try {
@@ -60,17 +66,14 @@ public class YahooTest {
         }
     }
 
-    public static String YA_CITY_URI = "http://weather.yandex.ru/static/cities.xml";
-    public static String YA_CITY_NAME = "Екатеринбург";
-
     @Test
     public void testYaCityId() throws Exception {
-        URL url = new URL(YA_CITY_URI);
+        URL url = new URL(weatherConfig.getYandexCitiesURI());
         InputStream is = (InputStream) url.getContent();
         try {
             Document document = $(is).document();
             Match country = $(document).children("country");
-            Match city = country.children("city").matchText(YA_CITY_NAME);
+            Match city = country.children("city").matchText(weatherConfig.getYandexCityName());
             System.out.println(city);
             System.out.println(city.attr("id"));
             System.out.println(city.text());
@@ -80,12 +83,9 @@ public class YahooTest {
         }
     }
 
-    public static String YA_FORECAST_URI = "http://export.yandex.ru/weather-ng/forecasts/%s.xml";
-    public static String YA_CITY_ID = "28440";
-
     @Test
     public void testYaWeather() throws Exception {
-        URL url = new URL(String.format(YA_FORECAST_URI, YA_CITY_ID));
+        URL url = new URL(String.format(weatherConfig.getYandexForecastURI(), weatherConfig.getYandexCityId()));
         InputStream is = (InputStream) url.getContent();
         try {
             Document document = $(is).document();

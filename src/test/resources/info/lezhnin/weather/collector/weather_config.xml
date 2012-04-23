@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="weatherConfig" class="info.lezhnin.weather.collector.WeatherTestConfig">
+        <property name="yahooAppId" value="6Bs9OQLV34E2rlFrKF.H2Hhzzxv0G_TFRwZEspI8U6XJ0NmHAG9mrShLrM5_RUcy8CvFJMqqV1t9N868U6CGcQvTytlSpao-" />
+        <property name="yahooForecastURI" value="http://weather.yahooapis.com/forecastrss?w=%s&amp;u=c" />
+        <property name="yahooPlaceName" value="Stockholm" />
+        <property name="yahooPlaceId" value="906057" />
+        <property name="yahooPlacesURI" value="http://where.yahooapis.com/v1/places.q(%s)?appid=%s" />
+        <property name="yandexCitiesURI" value="http://weather.yandex.ru/static/cities.xml" />
+        <property name="yandexCityId" value="28440" />
+        <property name="yandexCityName" value="Екатеринбург" />
+        <property name="yandexForecastURI" value="http://export.yandex.ru/weather-ng/forecasts/%s.xml" />
+    </bean>
+
+</beans>
