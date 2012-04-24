@@ -25,4 +25,27 @@ public class City {
     @OneToMany(mappedBy = "city")
     private Set<WeatherData> weatherData;
 
+    public Set<CityData> getCityData() {
+        return cityData;
+    }
+
+    public void setCityData(Set<CityData> cityData) {
+        this.cityData = cityData;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<WeatherData> getWeatherData() {
+        return weatherData;
+    }
+
+    public void setWeatherData(Set<WeatherData> weatherData) {
+        this.weatherData = weatherData;
+    }
 }

@@ -5,7 +5,7 @@
 
 <hibernate-configuration>
 
-    <session-factory>
+    <session-factory name="HSQL-Embedded">
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
