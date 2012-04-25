@@ -11,20 +11,21 @@ import java.util.Set;
  * @author Sergey Lezhnin <s.lezhnin@metamodel.ru>
  */
 @Entity
-@Table(name = "WEATHER_SERVICE")
-public class WeatherService {
+@Table(name = "WEATHER_PROVIDER")
+public class WeatherProvider {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue
     private Integer id;
 
-    @OneToMany(mappedBy = "weatherService")
+    @OneToMany(mappedBy = "weatherProvider")
     private Set<CityData> cityData;
 
-    @OneToMany(mappedBy = "weatherService")
+    @OneToMany(mappedBy = "weatherProvider")
     private Set<WeatherData> weatherData;
 
+    @Column(name = "NAME", unique = true)
     private String name;
 
     public Set<CityData> getCityData() {
@@ -58,4 +59,5 @@ public class WeatherService {
     public void setWeatherData(Set<WeatherData> weatherData) {
         this.weatherData = weatherData;
     }
+
 }

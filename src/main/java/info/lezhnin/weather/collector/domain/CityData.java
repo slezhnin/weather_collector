@@ -21,9 +21,9 @@ public class CityData {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "WEATHER_SERVICE_ID")
-    @ForeignKey(name = "FK_CITY_DATA_TO_WEATHER_SERVICE")
-    private WeatherService weatherService;
+    @JoinColumn(name = "WEATHER_PROVIDER_ID")
+    @ForeignKey(name = "FK_CITY_DATA_TO_WEATHER_PROVIDER")
+    private WeatherProvider weatherProvider;
 
     @ManyToOne
     @JoinColumn(name = "CITY_ID")
@@ -68,11 +68,11 @@ public class CityData {
         this.placeId = placeId;
     }
 
-    public WeatherService getWeatherService() {
-        return weatherService;
+    public WeatherProvider getWeatherProvider() {
+        return weatherProvider;
     }
 
-    public void setWeatherService(WeatherService weatherService) {
-        this.weatherService = weatherService;
+    public void setWeatherProvider(WeatherProvider weatherProvider) {
+        this.weatherProvider = weatherProvider;
     }
 }

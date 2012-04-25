@@ -6,6 +6,7 @@ import info.lezhnin.weather.collector.domain.City;
 import info.lezhnin.weather.collector.domain.CityData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nullable;
 
@@ -23,6 +24,7 @@ public class CityServiceImpl implements CityService {
     private CityDAO cityDAO;
 
     @Nullable
+    @Transactional
     public City findCity(CityData cityData, boolean createIfNotFound) {
         City city = cityDAO.findCity(cityData);
         if (city == null && createIfNotFound) {

@@ -3,6 +3,7 @@ package info.lezhnin.weather.collector.domain;
 import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Weather Data Entity.
@@ -26,9 +27,12 @@ public class WeatherData {
     private City city;
 
     @ManyToOne
-    @JoinColumn(name = "WEATHER_SERVICE_ID")
-    @ForeignKey(name = "FK_WEATHER_DATA_TO_WEATHER_SERVICE")
-    private WeatherService weatherService;
+    @JoinColumn(name = "WEATHER_PROVIDER_ID")
+    @ForeignKey(name = "FK_WEATHER_DATA_TO_WEATHER_PROVIDER")
+    private WeatherProvider weatherProvider;
+
+    @Column(name = "OBSERVATION_TIME")
+    private Date observationTime;
 
     @Column(name = "CONDITIONS")
     private String conditions;
@@ -68,11 +72,11 @@ public class WeatherData {
         this.temperature = temperature;
     }
 
-    public WeatherService getWeatherService() {
-        return weatherService;
+    public WeatherProvider getWeatherProvider() {
+        return weatherProvider;
     }
 
-    public void setWeatherService(WeatherService weatherService) {
-        this.weatherService = weatherService;
+    public void setWeatherProvider(WeatherProvider weatherProvider) {
+        this.weatherProvider = weatherProvider;
     }
 }
