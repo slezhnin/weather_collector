@@ -38,7 +38,7 @@ public class WeatherData {
     private String conditions;
 
     @Column(name = "TEMPERATURE")
-    private String temperature;
+    private Integer temperature;
 
     public City getCity() {
         return city;
@@ -64,11 +64,19 @@ public class WeatherData {
         this.id = id;
     }
 
-    public String getTemperature() {
+    public Date getObservationTime() {
+        return observationTime;
+    }
+
+    public void setObservationTime(Date observationTime) {
+        this.observationTime = observationTime;
+    }
+
+    public Integer getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(Integer temperature) {
         this.temperature = temperature;
     }
 

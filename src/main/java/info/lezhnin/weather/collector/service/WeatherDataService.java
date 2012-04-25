@@ -1,4 +1,4 @@
-package info.lezhnin.weather.collector.dao;
+package info.lezhnin.weather.collector.service;
 
 import info.lezhnin.weather.collector.domain.City;
 import info.lezhnin.weather.collector.domain.WeatherData;
@@ -9,17 +9,15 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Weather Data DAO interface.
+ * Weather Data service interface.
  * <p/>
  * Date: 25.04.12
  *
  * @author Sergey Lezhnin <s.lezhnin@gmail.com>
  */
-public interface WeatherDataDAO {
+public interface WeatherDataService {
 
-    void saveWeatherData(WeatherData weatherData);
-
-    WeatherData findWeatherData(City city, WeatherProvider weatherProvider, Date observationTime);
+    boolean addWeatherData(City city, WeatherProvider weatherProvider, Date observationTime, String conditions, Integer temperature);
 
     List<WeatherData> list(@Nullable City city, @Nullable WeatherProvider weatherProvider, boolean chronologicalOrder);
 

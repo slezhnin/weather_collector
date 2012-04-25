@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Nullable;
 
 /**
- * City service implementation.
+ * Weather Provider service implementation.
  * <p/>
  * Date: 24.04.12
  *
