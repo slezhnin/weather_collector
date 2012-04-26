@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="info.lezhnin.weather.collector.config.WeatherProviderConfig" id="yahooWeatherProvider">
+        <property name="name" value="yahoo"/>
+        <property name="id"
+                  value="6Bs9OQLV34E2rlFrKF.H2Hhzzxv0G_TFRwZEspI8U6XJ0NmHAG9mrShLrM5_RUcy8CvFJMqqV1t9N868U6CGcQvTytlSpao-"/>
+        <property name="placesURI" value="http://where.yahooapis.com/v1/places.q(%s)?appid=%s"/>
+        <property name="forecastURI" value="http://weather.yahooapis.com/forecastrss?w=%s&amp;u=c"/>
+    </bean>
+
+    <bean class="info.lezhnin.weather.collector.config.WeatherProviderConfig" id="yandexWeatherProvider">
+        <property name="name" value="yandex"/>
+        <property name="placesURI" value="http://weather.yandex.ru/static/cities.xml"/>
+        <property name="forecastURI" value="http://export.yandex.ru/weather-ng/forecasts/%s.xml"/>
+    </bean>
+
+    <bean class="info.lezhnin.weather.collector.config.WeatherConfig" id="weatherConfig">
+        <property name="providers">
+            <list>
+                <ref bean="yahooWeatherProvider" />
+                <ref bean="yandexWeatherProvider" />
+            </list>
+        </property>
+        <property name="cities">
+            <list>
+                <bean class="info.lezhnin.weather.collector.config.CityConfig">
+                    <property name="cityData">
+                        <list>
+                            <bean class="info.lezhnin.weather.collector.config.CityDataConfig">
+                                <property name="weatherProvider" ref="yahooWeatherProvider" />
+                                <property name="name" value="Ekaterinburg" />
+                            </bean>
+                            <bean class="info.lezhnin.weather.collector.config.CityDataConfig">
+                                <property name="weatherProvider" ref="yandexWeatherProvider" />
+                                <property name="name" value="Екатеринбург" />
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="info.lezhnin.weather.collector.config.CityConfig">
+                    <property name="cityData">
+                        <list>
+                            <bean class="info.lezhnin.weather.collector.config.CityDataConfig">
+                                <property name="weatherProvider" ref="yahooWeatherProvider" />
+                                <property name="name" value="Moscow" />
+                            </bean>
+                            <bean class="info.lezhnin.weather.collector.config.CityDataConfig">
+                                <property name="weatherProvider" ref="yandexWeatherProvider" />
+                                <property name="name" value="Москва" />
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+</beans>                       

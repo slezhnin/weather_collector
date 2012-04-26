@@ -24,8 +24,8 @@ public class WeatherTest {
 
     @BeforeClass
     public static void before() throws Exception {
-        weatherConfig = (WeatherTestConfig) new ClassPathXmlApplicationContext(
-                "info/lezhnin/weather/collector/weather_config.xml").getBean("weatherConfig");
+        weatherConfig = (WeatherTestConfig) new ClassPathXmlApplicationContext("weather_test_config.xml")
+                .getBean("weatherConfig");
     }
 
     @Test

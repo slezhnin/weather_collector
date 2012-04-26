@@ -18,6 +18,4 @@
     -->
     <import resource="database.xml"/>
     <import resource="weather_config.xml"/>
-    <!-- Файл с настройками безопасности -->
-    <import resource="security.xml"/>
 </beans>

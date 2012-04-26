@@ -34,4 +34,10 @@ public class CityServiceImpl implements CityService {
         }
         return city;
     }
+
+    @Transactional
+    public void addDataTo(City city, CityData cityData) {
+        city.getCityData().add(cityData);
+        cityDAO.saveCity(city);
+    }
 }

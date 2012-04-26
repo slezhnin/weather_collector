@@ -15,4 +15,5 @@ import javax.annotation.Nullable;
 public interface CityService {
     @Nullable
     City findCity(CityData cityData, boolean createIfNotFound);
+    void addDataTo(City city, CityData cityData);
 }
