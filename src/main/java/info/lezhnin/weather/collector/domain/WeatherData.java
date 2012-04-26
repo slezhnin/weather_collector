@@ -21,12 +21,12 @@ public class WeatherData {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = City.class)
     @JoinColumn(name = "CITY_ID")
     @ForeignKey(name = "FK_WEATHER_DATA_TO_CITIES")
     private City city;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = WeatherProvider.class)
     @JoinColumn(name = "WEATHER_PROVIDER_ID")
     @ForeignKey(name = "FK_WEATHER_DATA_TO_WEATHER_PROVIDER")
     private WeatherProvider weatherProvider;

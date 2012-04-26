@@ -1,5 +1,6 @@
 package info.lezhnin.weather.collector.domain;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
@@ -20,12 +21,12 @@ public class CityData {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = WeatherProvider.class)
     @JoinColumn(name = "WEATHER_PROVIDER_ID")
     @ForeignKey(name = "FK_CITY_DATA_TO_WEATHER_PROVIDER")
     private WeatherProvider weatherProvider;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = City.class)
     @JoinColumn(name = "CITY_ID")
     @ForeignKey(name = "FK_CITY_DATA_TO_CITIES")
     private City city;

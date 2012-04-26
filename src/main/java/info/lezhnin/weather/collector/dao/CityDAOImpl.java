@@ -21,13 +21,19 @@ public class CityDAOImpl implements CityDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Override
+    public List<City> listCities() {
+        return sessionFactory.getCurrentSession().createQuery("from City").list();
+    }
+
     public void saveCity(City city) {
         sessionFactory.getCurrentSession().save(city);
     }
 
     public City findCity(CityData cityData) {
-        List<City> cities = sessionFactory.getCurrentSession().createQuery("from City where cityData in (:cityData)")
-                .setEntity("cityData", cityData).list();
+        List<City> cities =
+                sessionFactory.getCurrentSession().createQuery("from City where :cityData in elements(cityData)")
+                        .setEntity("cityData", cityData).list();
         if (cities.size() > 0) {
             return cities.get(0);
         }

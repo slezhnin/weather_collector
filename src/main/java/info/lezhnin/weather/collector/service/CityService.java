@@ -4,6 +4,7 @@ import info.lezhnin.weather.collector.domain.City;
 import info.lezhnin.weather.collector.domain.CityData;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * City service interface.
@@ -13,6 +14,7 @@ import javax.annotation.Nullable;
  * @author Sergey Lezhnin <s.lezhnin@gmail.com>
  */
 public interface CityService {
+    List<City> listCities();
     @Nullable
     City findCity(CityData cityData, boolean createIfNotFound);
     void addDataTo(City city, CityData cityData);

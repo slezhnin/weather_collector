@@ -19,10 +19,10 @@ public class WeatherProvider {
     @GeneratedValue
     private Integer id;
 
-    @OneToMany(mappedBy = "weatherProvider")
+    @OneToMany(mappedBy = "weatherProvider", targetEntity = CityData.class)
     private Set<CityData> cityData;
 
-    @OneToMany(mappedBy = "weatherProvider")
+    @OneToMany(mappedBy = "weatherProvider", targetEntity = WeatherData.class)
     private Set<WeatherData> weatherData;
 
     @Column(name = "NAME", unique = true)

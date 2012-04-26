@@ -15,8 +15,11 @@ import java.util.List;
  */
 public interface CityDAO {
 
+    public List<City> listCities();
+
     public void saveCity(City city);
 
     @Nullable
     public City findCity(CityData cityData);
+
 }
