@@ -1,16 +1,9 @@
 <beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xsi:schemaLocation=" http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <!--
-    DispatcherServlet Context: определяет настройки одного сервлета; бины, которые доступны только ему
-    -->
-    <!--
-    Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д)
-    -->
+
     <annotation-driven/>
-    <!--
-    Всю статику (изображения, css-файлы, javascript) положим в папку webapp/resources и замаппим их на урл вида /resources/**
-    -->
+
     <resources mapping="/resources/**" location="/resources/"/>
 
     <!-- freemarker config -->
@@ -24,13 +17,14 @@
 
     -->
     <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <beans:property name="contentType" value="text/html;charset=UTF-8" />
         <beans:property name="cache" value="true"/>
         <beans:property name="prefix" value=""/>
         <beans:property name="suffix" value=".ftl"/>
-
         <!-- if you want to use the Spring FreeMarker macros, set this property to true -->
         <beans:property name="exposeSpringMacroHelpers" value="true"/>
+    </beans:bean>
 
-    </beans:bean>    <!-- Файл с настройками контроллеров -->
     <beans:import resource="controllers.xml"/>
+
 </beans:beans>

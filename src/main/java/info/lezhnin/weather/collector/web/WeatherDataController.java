@@ -20,7 +20,7 @@ public class WeatherDataController {
     @Autowired
     private WeatherDataService weatherDataService;
 
-    @RequestMapping("/index")
+    @RequestMapping("data")
     public String listWeatherData(Map<String, Object> map) {
         map.put("weatherList", weatherDataService.list(null, null, false));
         return "weather";
@@ -28,7 +28,7 @@ public class WeatherDataController {
 
     @RequestMapping("/")
     public String home() {
-        return "redirect:/index";
+        return "redirect:data";
     }
 
 }
