@@ -4,5 +4,5 @@
     <!--
     Определяем папку, в которой будем искать веб компоненты (контроллеры)
     -->
-    <context:component-scan base-package="info.lezhnin.weather.collector.service"/>
+    <context:component-scan base-package="info.lezhnin.weather.collector.web"/>
 </beans>
