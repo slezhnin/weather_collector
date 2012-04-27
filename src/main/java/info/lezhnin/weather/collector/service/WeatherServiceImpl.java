@@ -1,5 +1,6 @@
 package info.lezhnin.weather.collector.service;
 
+import info.lezhnin.util.TimeZoneUtil;
 import info.lezhnin.weather.collector.config.WeatherProviderConfig;
 import info.lezhnin.weather.collector.domain.City;
 import info.lezhnin.weather.collector.domain.CityData;
@@ -39,7 +40,6 @@ public class WeatherServiceImpl implements WeatherService {
     @Autowired
     private CityService cityService;
 
-    @Override
     @Transactional
     public void collect() {
         for (City city : cityService.listCities()) {
@@ -69,8 +69,6 @@ public class WeatherServiceImpl implements WeatherService {
         InputStream is = (InputStream) url.getContent();
         try {
             Document document = $(is).document();
-            System.out.println($(document).attr("city"));
-            System.out.println($(document).attr("country"));
             Match fact = $(document).child("fact");
             weatherDataService.addWeatherData(city, weatherProvider,
                     DateTime.parse(fact.child("observation_time").text()).toDate(), fact.child("weather_type").text(),
@@ -91,16 +89,15 @@ public class WeatherServiceImpl implements WeatherService {
             Document document = $(is).document();
             Match channel = $(document).child("channel");
             Match location = channel.child("yweather:location");
-            System.out.println(location.attr("city"));
-            System.out.println(location.attr("country"));
             Match item = channel.child("item");
             Match condition = item.child("yweather:condition");
             weatherDataService.addWeatherData(city, weatherProvider, DateTime.parse(condition.attr("date"),
                     new DateTimeFormatterBuilder().appendDayOfWeekShortText().appendLiteral(", ").appendDayOfMonth(1)
                             .appendLiteral(' ').appendMonthOfYearShortText().appendLiteral(' ').appendYear(2, 4)
-                            .appendLiteral(' ').appendHourOfHalfday(1).appendLiteral(':').appendMinuteOfHour(2)
-                            .appendLiteral(' ').appendHalfdayOfDayText().appendLiteral(' ').appendTimeZoneShortName()
-                            .toFormatter()).toDate(), condition.attr("text"), Integer.valueOf(condition.attr("temp")));
+                            .appendLiteral(' ').appendHourOfDay(1).appendLiteral(':').appendMinuteOfHour(2)
+                            .appendLiteral(' ').appendHalfdayOfDayText().appendLiteral(' ')
+                            .appendTimeZoneShortName(TimeZoneUtil.getAbbreviatedNameToTimeZoneMap()).toFormatter())
+                    .toDate(), condition.attr("text"), Integer.valueOf(condition.attr("temp")));
         } finally {
             is.close();
         }

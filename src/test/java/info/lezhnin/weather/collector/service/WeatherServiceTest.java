@@ -1,5 +1,6 @@
 package info.lezhnin.weather.collector.service;
 
+import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherData;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.Session;
@@ -57,12 +58,21 @@ public class WeatherServiceTest {
     public void collectTest() {
         System.out.println(".initData()");
         weatherConfigService.initData();
-        System.out.println(".collect()");
-        weatherService.collect();
-        System.out.println(".list()");
-        List<WeatherData> weatherData = weatherDataService.list(null, null, false);
-        for (WeatherData wd : weatherData) {
-            System.out.println(ReflectionToStringBuilder.toString(wd));
+        for (int i = 0; i < 2; i++) {
+            System.out.println(".collect()");
+            weatherService.collect();
+            System.out.println(".list()");
+            List<WeatherData> weatherData = weatherDataService.list(null, null, false);
+            for (WeatherData wd : weatherData) {
+                System.out.println(ReflectionToStringBuilder.toString(wd));
+                System.out.println(ReflectionToStringBuilder.toString(wd.getWeatherProvider()));
+                for (CityData cd : wd.getCity().getCityData()) {
+                    if (cd.getWeatherProvider().getName().equalsIgnoreCase(wd.getWeatherProvider().getName())) {
+                        System.out.println(ReflectionToStringBuilder.toString(cd));
+                    }
+                }
+                System.out.println("--------------------");
+            }
         }
     }
 
