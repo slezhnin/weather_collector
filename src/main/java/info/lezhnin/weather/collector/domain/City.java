@@ -22,9 +22,6 @@ public class City {
     @OneToMany(mappedBy = "city", targetEntity = CityData.class)
     private Set<CityData> cityData;
 
-    @OneToMany(mappedBy = "city", targetEntity = WeatherData.class)
-    private Set<WeatherData> weatherData;
-
     public Set<CityData> getCityData() {
         return cityData;
     }
@@ -41,11 +38,4 @@ public class City {
         this.id = id;
     }
 
-    public Set<WeatherData> getWeatherData() {
-        return weatherData;
-    }
-
-    public void setWeatherData(Set<WeatherData> weatherData) {
-        this.weatherData = weatherData;
-    }
 }

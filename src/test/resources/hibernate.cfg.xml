@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <property name="current_session_context_class">thread</property>
+
+        <mapping class="info.lezhnin.weather.collector.domain.City"/>
+        <mapping class="info.lezhnin.weather.collector.domain.CityData"/>
+        <mapping class="info.lezhnin.weather.collector.domain.WeatherData"/>
+        <mapping class="info.lezhnin.weather.collector.domain.WeatherProvider"/>
+
+    </session-factory>
+
+</hibernate-configuration>

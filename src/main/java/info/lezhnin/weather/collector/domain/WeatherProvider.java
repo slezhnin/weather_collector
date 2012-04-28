@@ -22,9 +22,6 @@ public class WeatherProvider {
     @OneToMany(mappedBy = "weatherProvider", targetEntity = CityData.class)
     private Set<CityData> cityData;
 
-    @OneToMany(mappedBy = "weatherProvider", targetEntity = WeatherData.class)
-    private Set<WeatherData> weatherData;
-
     @Column(name = "NAME", unique = true)
     private String name;
 
@@ -50,14 +47,6 @@ public class WeatherProvider {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<WeatherData> getWeatherData() {
-        return weatherData;
-    }
-
-    public void setWeatherData(Set<WeatherData> weatherData) {
-        this.weatherData = weatherData;
     }
 
 }

@@ -1,8 +1,7 @@
 package info.lezhnin.weather.collector.service;
 
-import info.lezhnin.weather.collector.domain.City;
+import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherData;
-import info.lezhnin.weather.collector.domain.WeatherProvider;
 
 import javax.annotation.Nullable;
 import java.util.Date;
@@ -17,8 +16,8 @@ import java.util.List;
  */
 public interface WeatherDataService {
 
-    boolean addWeatherData(City city, WeatherProvider weatherProvider, Date observationTime, String conditions, Integer temperature);
+    boolean addWeatherData(CityData cityData, Date observationTime, String conditions, Integer temperature);
 
-    List<WeatherData> list(@Nullable City city, @Nullable WeatherProvider weatherProvider, boolean chronologicalOrder);
+    List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder);
 
 }

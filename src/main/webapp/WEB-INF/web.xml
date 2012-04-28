@@ -24,12 +24,23 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>5</load-on-startup>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/weather/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>weatherServlet</servlet-name>
+        <servlet-class>info.lezhnin.weather.collector.web.WeatherServlet</servlet-class>
+        <load-on-startup>10</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>weatherServlet</servlet-name>
+        <url-pattern>/weather/weatherServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

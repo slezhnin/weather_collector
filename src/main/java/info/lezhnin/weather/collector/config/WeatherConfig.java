@@ -13,6 +13,7 @@ public class WeatherConfig {
 
     private List<WeatherProviderConfig> providers;
     private List<CityConfig> cities;
+    private Integer updateIntervalInMinutes;
 
     public List<CityConfig> getCities() {
         return cities;
@@ -28,6 +29,14 @@ public class WeatherConfig {
 
     public void setProviders(List<WeatherProviderConfig> providers) {
         this.providers = providers;
+    }
+
+    public Integer getUpdateIntervalInMinutes() {
+        return updateIntervalInMinutes;
+    }
+
+    public void setUpdateIntervalInMinutes(Integer updateIntervalInMinutes) {
+        this.updateIntervalInMinutes = updateIntervalInMinutes;
     }
 
 }

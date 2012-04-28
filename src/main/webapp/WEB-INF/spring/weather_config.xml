@@ -18,6 +18,7 @@
     </bean>
 
     <bean class="info.lezhnin.weather.collector.config.WeatherConfig" id="weatherConfig">
+        <property name="updateIntervalInMinutes" value="5"/>
         <property name="providers">
             <list>
                 <ref bean="yahooWeatherProvider" />

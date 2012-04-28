@@ -7,6 +7,8 @@
     <context:component-scan base-package="info.lezhnin.weather.collector.dao"/>
     <context:component-scan base-package="info.lezhnin.weather.collector.service"/>
 
+    <bean id="appContextProvider" class="info.lezhnin.weather.collector.service.AppContextProvider"/>
+
     <import resource="database.xml"/>
     <import resource="weather_config.xml"/>
 </beans>

@@ -1,12 +1,10 @@
 package info.lezhnin.weather.collector.service;
 
 import com.google.common.collect.Sets;
-import info.lezhnin.weather.collector.dao.CityDAO;
+import info.lezhnin.weather.collector.dao.CityDataDAO;
 import info.lezhnin.weather.collector.dao.WeatherDataDAO;
-import info.lezhnin.weather.collector.dao.WeatherProviderDAO;
-import info.lezhnin.weather.collector.domain.City;
+import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherData;
-import info.lezhnin.weather.collector.domain.WeatherProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,45 +24,33 @@ import java.util.List;
 public class WeatherDataServiceImpl implements WeatherDataService {
 
     @Autowired
-    private WeatherProviderDAO weatherProviderDAO;
-
-    @Autowired
     private WeatherDataDAO weatherDataDAO;
 
     @Autowired
-    private CityDAO cityDAO;
+    private CityDataDAO cityDataDAO;
 
     @Transactional
-    public boolean addWeatherData(City city, WeatherProvider weatherProvider, Date observationTime, String conditions,
-            Integer temperature) {
-        if (weatherDataDAO.findWeatherData(city, weatherProvider, observationTime) != null) {
+    public boolean addWeatherData(CityData cityData, Date observationTime, String conditions, Integer temperature) {
+        if (weatherDataDAO.findWeatherData(cityData, observationTime) != null) {
             return false;
         }
         WeatherData weatherData = new WeatherData();
-        weatherData.setCity(city);
-        weatherData.setWeatherProvider(weatherProvider);
+        weatherData.setCityData(cityData);
         weatherData.setObservationTime(observationTime);
         weatherData.setConditions(conditions);
         weatherData.setTemperature(temperature);
         weatherDataDAO.saveWeatherData(weatherData);
-        if (city.getWeatherData() == null) {
-            city.setWeatherData(Sets.newHashSet(weatherData));
+        if (cityData.getWeatherData() == null) {
+            cityData.setWeatherData(Sets.newHashSet(weatherData));
         } else {
-            city.getWeatherData().add(weatherData);
+            cityData.getWeatherData().add(weatherData);
         }
-        cityDAO.saveCity(city);
-        if (weatherProvider.getWeatherData() == null) {
-            weatherProvider.setWeatherData(Sets.newHashSet(weatherData));
-        } else {
-            weatherProvider.getWeatherData().add(weatherData);
-        }
-        weatherProviderDAO.saveWeatherProvider(weatherProvider);
+        cityDataDAO.saveCityData(cityData);
         return true;
     }
 
     @Transactional
-    public List<WeatherData> list(@Nullable City city, @Nullable WeatherProvider weatherProvider,
-            boolean chronologicalOrder) {
-        return weatherDataDAO.list(city, weatherProvider, chronologicalOrder);
+    public List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder) {
+        return weatherDataDAO.list(cityData, chronologicalOrder);
     }
 }

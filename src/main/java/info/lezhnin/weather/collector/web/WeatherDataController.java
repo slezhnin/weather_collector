@@ -22,7 +22,7 @@ public class WeatherDataController {
 
     @RequestMapping("data")
     public String listWeatherData(Map<String, Object> map) {
-        map.put("weatherList", weatherDataService.list(null, null, false));
+        map.put("weatherList", weatherDataService.list(null, false));
         return "weather";
     }
 

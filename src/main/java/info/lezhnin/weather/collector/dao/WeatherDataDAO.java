@@ -1,8 +1,7 @@
 package info.lezhnin.weather.collector.dao;
 
-import info.lezhnin.weather.collector.domain.City;
+import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherData;
-import info.lezhnin.weather.collector.domain.WeatherProvider;
 
 import javax.annotation.Nullable;
 import java.util.Date;
@@ -19,8 +18,8 @@ public interface WeatherDataDAO {
 
     void saveWeatherData(WeatherData weatherData);
 
-    WeatherData findWeatherData(City city, WeatherProvider weatherProvider, Date observationTime);
+    WeatherData findWeatherData(CityData cityData, Date observationTime);
 
-    List<WeatherData> list(@Nullable City city, @Nullable WeatherProvider weatherProvider, boolean chronologicalOrder);
+    List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder);
 
 }

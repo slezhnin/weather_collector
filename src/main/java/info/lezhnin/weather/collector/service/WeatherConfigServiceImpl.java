@@ -42,14 +42,13 @@ public class WeatherConfigServiceImpl implements WeatherConfigService {
     @Autowired
     private WeatherProviderService weatherProviderService;
     @Autowired
-    private WeatherDataService weatherDataService;
-    @Autowired
     private CityService cityService;
     @Autowired
     private CityDataService cityDataService;
 
     @Transactional
     public void initData() {
+        Logger.getLogger(getClass()).debug("Init. weather data.");
         List<WeatherProvider> weatherProviders = Lists.newArrayList();
         for (WeatherProviderConfig weatherProviderConfig : weatherConfig.getProviders()) {
             WeatherProvider weatherProvider =
@@ -80,11 +79,14 @@ public class WeatherConfigServiceImpl implements WeatherConfigService {
 
     public List<String> listWeatherProviders() {
         return Lists.transform(weatherConfig.getProviders(), new Function<WeatherProviderConfig, String>() {
-            @Override
             public String apply(@Nullable WeatherProviderConfig input) {
                 return input.getName();
             }
         });
+    }
+
+    public WeatherConfig getWeatherConfig() {
+        return weatherConfig;
     }
 
     public WeatherProviderConfig getWeatherProviderConfig(String weatherProviderName) {

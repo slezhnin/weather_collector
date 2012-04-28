@@ -28,7 +28,6 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CityDataDAO cityDataDAO;
 
-    @Override
     public List<City> listCities() {
         return cityDAO.listCities();
     }

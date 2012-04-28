@@ -1,9 +1,9 @@
 package info.lezhnin.weather.collector.domain;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * City Data Entity.
@@ -30,6 +30,9 @@ public class CityData {
     @JoinColumn(name = "CITY_ID")
     @ForeignKey(name = "FK_CITY_DATA_TO_CITIES")
     private City city;
+
+    @OneToMany(mappedBy = "cityData", targetEntity = WeatherData.class)
+    private Set<WeatherData> weatherData;
 
     @Column(name = "NAME")
     private String name;
@@ -75,5 +78,13 @@ public class CityData {
 
     public void setWeatherProvider(WeatherProvider weatherProvider) {
         this.weatherProvider = weatherProvider;
+    }
+
+    public Set<WeatherData> getWeatherData() {
+        return weatherData;
+    }
+
+    public void setWeatherData(Set<WeatherData> weatherData) {
+        this.weatherData = weatherData;
     }
 }

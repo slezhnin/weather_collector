@@ -1,6 +1,7 @@
 package info.lezhnin.weather.collector.domain;
 
 import org.hibernate.annotations.ForeignKey;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,15 +22,10 @@ public class WeatherData {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne(targetEntity = City.class)
-    @JoinColumn(name = "CITY_ID")
-    @ForeignKey(name = "FK_WEATHER_DATA_TO_CITIES")
-    private City city;
-
-    @ManyToOne(targetEntity = WeatherProvider.class)
-    @JoinColumn(name = "WEATHER_PROVIDER_ID")
-    @ForeignKey(name = "FK_WEATHER_DATA_TO_WEATHER_PROVIDER")
-    private WeatherProvider weatherProvider;
+    @ManyToOne(targetEntity = CityData.class)
+    @JoinColumn(name = "CITY_DATA_ID")
+    @ForeignKey(name = "FK_WEATHER_DATA_TO_CITY_DATA")
+    private CityData cityData;
 
     @Column(name = "OBSERVATION_TIME")
     private Date observationTime;
@@ -39,14 +35,6 @@ public class WeatherData {
 
     @Column(name = "TEMPERATURE")
     private Integer temperature;
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
 
     public String getConditions() {
         return conditions;
@@ -68,6 +56,18 @@ public class WeatherData {
         return observationTime;
     }
 
+    public String getObservationTimeAsString() {
+        return new DateTime(observationTime).toString("dd MMM yyyy HH:mm");
+    }
+
+    public CityData getCityData() {
+        return cityData;
+    }
+
+    public void setCityData(CityData cityData) {
+        this.cityData = cityData;
+    }
+
     public void setObservationTime(Date observationTime) {
         this.observationTime = observationTime;
     }
@@ -80,11 +80,4 @@ public class WeatherData {
         this.temperature = temperature;
     }
 
-    public WeatherProvider getWeatherProvider() {
-        return weatherProvider;
-    }
-
-    public void setWeatherProvider(WeatherProvider weatherProvider) {
-        this.weatherProvider = weatherProvider;
-    }
 }

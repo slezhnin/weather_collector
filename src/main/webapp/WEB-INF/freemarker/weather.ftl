@@ -11,15 +11,37 @@
 
 <body>
 
-<img src="/resources/icon.png" alt="weather">
+<a href="/weather/data">
+    <img src="/resources/icon.png" alt="weather">
+</a>
 
 <h1><@spring.message "weather.title"/></h1>
 
 <#if weatherList?size != 0 >
 
-<#list weatherList as weatherData >
+<table cellpadding="5" cellspacing="5" frame="border">
 
-</#list>
+    <tr>
+        <th><@spring.message "weather.time"/></th>
+        <th><@spring.message "weather.conditions"/></th>
+        <th><@spring.message "weather.temperature"/></th>
+        <th><@spring.message "weather.city"/></th>
+        <th><@spring.message "weather.provider"/></th>
+    </tr>
+
+    <#list weatherList as weatherData >
+
+        <tr>
+            <td>${weatherData.observationTimeAsString}</td>
+            <td align="right">${weatherData.conditions}</td>
+            <td align="center">${weatherData.temperature}</td>
+            <td>${weatherData.cityData.name}</td>
+            <td>${weatherData.cityData.weatherProvider.name}</td>
+        </tr>
+
+    </#list>
+
+</table>
 
 <#else >
 

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Sergey Lezhnin <s.lezhnin@gmail.com>
  */
 public interface WeatherService {
+
     @Transactional
     void collect();
+
 }
