@@ -50,7 +50,7 @@ public class WeatherDataServiceImpl implements WeatherDataService {
     }
 
     @Transactional
-    public List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder) {
-        return weatherDataDAO.list(cityData, chronologicalOrder);
+    public List<WeatherData> list(@Nullable CityData cityData, @Nullable Integer daysBack, boolean chronologicalOrder) {
+        return weatherDataDAO.list(cityData, daysBack, chronologicalOrder);
     }
 }

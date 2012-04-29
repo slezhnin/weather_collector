@@ -2,6 +2,7 @@ package info.lezhnin.weather.collector.dao;
 
 import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherData;
+import org.joda.time.DateTime;
 
 import javax.annotation.Nullable;
 import java.util.Date;
@@ -20,6 +21,6 @@ public interface WeatherDataDAO {
 
     WeatherData findWeatherData(CityData cityData, Date observationTime);
 
-    List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder);
+    List<WeatherData> list(@Nullable CityData cityData, @Nullable Integer daysBack, boolean chronologicalOrder);
 
 }

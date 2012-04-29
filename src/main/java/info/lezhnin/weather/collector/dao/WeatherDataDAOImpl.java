@@ -1,9 +1,12 @@
 package info.lezhnin.weather.collector.dao;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherData;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateMidnight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,10 +42,17 @@ public class WeatherDataDAOImpl implements WeatherDataDAO {
         return null;
     }
 
-    public List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder) {
+    public List<WeatherData> list(@Nullable CityData cityData, @Nullable Integer daysBack, boolean chronologicalOrder) {
         StringBuilder queryBuilder = new StringBuilder("from WeatherData");
-        if (cityData != null) {
-            queryBuilder.append(" where cityData = :cityData");
+        if (cityData != null || daysBack != null) {
+            List<String> conditions = Lists.newArrayList();
+            if (cityData != null) {
+                conditions.add("cityData = :cityData");
+            }
+            if (daysBack != null) {
+                conditions.add("observationTime > :dateBack");
+            }
+            queryBuilder.append(" where ").append(Joiner.on(" and ").join(conditions));
         }
         queryBuilder.append(" order by observationTime");
         if (!chronologicalOrder) {
@@ -51,6 +61,9 @@ public class WeatherDataDAOImpl implements WeatherDataDAO {
         Query query = sessionFactory.getCurrentSession().createQuery(queryBuilder.toString());
         if (cityData != null) {
             query.setEntity("cityData", cityData);
+        }
+        if (daysBack != null) {
+            query.setDate("dateBack", new DateMidnight().minusDays(daysBack).toDate());
         }
         return query.list();
     }

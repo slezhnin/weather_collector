@@ -18,6 +18,6 @@ public interface WeatherDataService {
 
     boolean addWeatherData(CityData cityData, Date observationTime, String conditions, Integer temperature);
 
-    List<WeatherData> list(@Nullable CityData cityData, boolean chronologicalOrder);
+    List<WeatherData> list(@Nullable CityData cityData, @Nullable Integer daysBack, boolean chronologicalOrder);
 
 }

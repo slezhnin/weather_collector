@@ -17,7 +17,15 @@
 
 <h1><@spring.message "weather.title"/></h1>
 
-<#if weatherList?size != 0 >
+<#if weatherData?size != 0 >
+
+<form action="data/city" method="POST">
+    <@spring.message "weather.select.city"/>&nbsp;
+    <@spring.formSingleSelect "weatherFormData.cityDataId", cityData, "" />
+    <input type="submit" value="<@spring.message "weather.select"/>">
+</form>
+
+<p />
 
 <table cellpadding="5" cellspacing="5" frame="border">
 
@@ -29,14 +37,14 @@
         <th><@spring.message "weather.provider"/></th>
     </tr>
 
-    <#list weatherList as weatherData >
+    <#list weatherData as weatherItem >
 
         <tr>
-            <td>${weatherData.observationTimeAsString}</td>
-            <td align="right">${weatherData.conditions}</td>
-            <td align="center">${weatherData.temperature}</td>
-            <td>${weatherData.cityData.name}</td>
-            <td>${weatherData.cityData.weatherProvider.name}</td>
+            <td>${weatherItem.observationTimeAsString}</td>
+            <td align="right">${weatherItem.conditions}</td>
+            <td align="center">${weatherItem.temperature}</td>
+            <td>${weatherItem.cityData.name}</td>
+            <td>${weatherItem.cityData.weatherProvider.name}</td>
         </tr>
 
     </#list>

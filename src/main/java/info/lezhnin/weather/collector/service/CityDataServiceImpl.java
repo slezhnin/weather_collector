@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * City Data service implementation.
@@ -51,5 +52,15 @@ public class CityDataServiceImpl implements CityDataService {
             weatherProviderDAO.saveWeatherProvider(weatherProvider);
         }
         return cityData;
+    }
+
+    @Transactional
+    public List<CityData> listCityData() {
+        return cityDataDAO.listCityData();
+    }
+
+    @Transactional
+    public CityData getCityData(Integer id) {
+        return cityDataDAO.getCityData(id);
     }
 }

@@ -61,7 +61,7 @@ public class WeatherServiceTest {
             System.out.println(".collect()");
             weatherService.collect();
             System.out.println(".list()");
-            List<WeatherData> weatherData = weatherDataService.list(null, false);
+            List<WeatherData> weatherData = weatherDataService.list(null, null, false);
             for (WeatherData wd : weatherData) {
                 System.out.println(ReflectionToStringBuilder.toString(wd));
                 System.out.println(ReflectionToStringBuilder.toString(wd.getCityData()));

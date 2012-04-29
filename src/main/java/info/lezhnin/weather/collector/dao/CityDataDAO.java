@@ -4,6 +4,8 @@ import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.domain.WeatherProvider;
 
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * City Data DAO interface.
@@ -18,4 +20,10 @@ public interface CityDataDAO {
 
     @Nullable
     public CityData findCityData(WeatherProvider weatherProvider, String placeId);
+
+    public List<CityData> listCityData();
+
+    @Nullable
+    public CityData getCityData(Integer id);
+
 }
