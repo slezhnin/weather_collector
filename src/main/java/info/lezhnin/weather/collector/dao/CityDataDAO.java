@@ -5,7 +5,6 @@ import info.lezhnin.weather.collector.domain.WeatherProvider;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Set;
 
 /**
  * City Data DAO interface.

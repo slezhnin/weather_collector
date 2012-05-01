@@ -16,7 +16,7 @@ import java.util.List;
 public interface CityDataService {
     @Nullable
     CityData findCityData(WeatherProvider weatherProvider, String placeId, @Nullable String cityName,
-                          boolean createIfNotFound);
+            boolean createIfNotFound);
 
     public List<CityData> listCityData();
 

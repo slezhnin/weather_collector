@@ -15,7 +15,9 @@ import java.util.List;
  */
 public interface CityService {
     List<City> listCities();
+
     @Nullable
     City findCity(CityData cityData, boolean createIfNotFound);
+
     void addDataTo(City city, CityData cityData);
 }

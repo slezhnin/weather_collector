@@ -40,9 +40,9 @@ public class CityDataDAOImpl implements CityDataDAO {
     }
 
     public CityData getCityData(Integer id) {
-        List<CityData> cityData = sessionFactory.getCurrentSession()
-                .createQuery("from CityData where id = :id")
-                .setInteger("id", id).list();
+        List<CityData> cityData =
+                sessionFactory.getCurrentSession().createQuery("from CityData where id = :id").setInteger("id", id)
+                        .list();
         if (cityData.size() > 0) {
             return cityData.get(0);
         }

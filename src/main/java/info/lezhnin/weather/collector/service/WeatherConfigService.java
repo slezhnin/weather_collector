@@ -2,7 +2,6 @@ package info.lezhnin.weather.collector.service;
 
 import info.lezhnin.weather.collector.config.WeatherConfig;
 import info.lezhnin.weather.collector.config.WeatherProviderConfig;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

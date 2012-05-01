@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import info.lezhnin.weather.collector.domain.CityData;
 import info.lezhnin.weather.collector.service.CityDataService;
 import info.lezhnin.weather.collector.service.WeatherDataService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -41,15 +40,15 @@ public class WeatherDataController {
     @RequestMapping("data")
     public String listWeatherData(Map<String, Object> map) {
         map.put("cityData", mapCityData());
-        CityData byCityData = Strings.isNullOrEmpty(weatherFormData.getCityDataId()) ? null : cityDataService.getCityData(Integer.valueOf(weatherFormData.getCityDataId()));
+        CityData byCityData = Strings.isNullOrEmpty(weatherFormData.getCityDataId()) ? null :
+                cityDataService.getCityData(Integer.valueOf(weatherFormData.getCityDataId()));
         map.put("weatherData", weatherDataService.list(byCityData, 0, false));
         map.put("weatherFormData", weatherFormData);
         return "weather";
     }
 
     @RequestMapping(value = "data/city", method = RequestMethod.POST)
-    public String selectCity(@ModelAttribute("wfd") WeatherFormData wfd,
-                             BindingResult result) {
+    public String selectCity(@ModelAttribute("wfd") WeatherFormData wfd, BindingResult result) {
         weatherFormData.setCityDataId(wfd.getCityDataId());
         return "redirect:..";
     }
