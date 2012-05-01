@@ -25,7 +25,7 @@
     <input type="submit" value="<@spring.message "weather.select"/>">
 </form>
 
-<p />
+<p/>
 
 <table cellpadding="5" cellspacing="5" frame="border">
 

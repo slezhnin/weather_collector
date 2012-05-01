@@ -6,22 +6,15 @@
 
     <resources mapping="/resources/**" location="/resources/"/>
 
-    <!-- freemarker config -->
     <beans:bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <beans:property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
     </beans:bean>
-    <!--
 
-      View resolvers can also be configured with ResourceBundles or XML files. If you need
-      different view resolving based on Locale, you have to use the resource bundle resolver.
-
-    -->
     <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <beans:property name="contentType" value="text/html;charset=UTF-8" />
+        <beans:property name="contentType" value="text/html;charset=UTF-8"/>
         <beans:property name="cache" value="true"/>
         <beans:property name="prefix" value=""/>
         <beans:property name="suffix" value=".ftl"/>
-        <!-- if you want to use the Spring FreeMarker macros, set this property to true -->
         <beans:property name="exposeSpringMacroHelpers" value="true"/>
     </beans:bean>
 
